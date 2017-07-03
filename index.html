@@ -21,8 +21,8 @@
   <body>
     <a-scene>
       <a-assets>
-        <video id="hands1" loop autoplay muted />
-        <video id="grass" loop autoplay muted />
+        <video id="hands1" loop autoplay muted crossorigin="anonymous"/>
+        <video id="grass" src="./assets/grass.mp4" loop autoplay muted crossorigin="anonymous"/>
 
         <a-mixin id="hands" material="shader: chromakey; src: #hands1; color: 0.1 0.9 0.2" width="16" height="16" geometry="primitive: plane"></a-mixin>
 
@@ -48,14 +48,17 @@
         ></a-mixin>
 
       </a-assets>
-
+<!--
       <a-sky
         animation="property: color; dir: alternate; dur: 60000;
                            easing: easeInSine; loop: true; from: #FF00FF; to: #00FFFF"
-      ></a-sky>
+      ></a-sky> -->
 
       <a-entity rotation="-90 0 0" camera="userHeight: 1.6; fov: 75" look-controls>
         <a-entity wireframe-linewidth="4" geometry="primitive: box" width="16" height="8" scale="20 10 20" position="0 0 -5" material="color: white" wireframe></a-entity>
+
+        <a-entity id="grass" material="shader: flat; src: #grass;" width="16" height="16" scale="18 10 9" position="0 0 -6" geometry="primitive: plane"></a-entity>
+
 
         <!-- left -->
         <a-entity
