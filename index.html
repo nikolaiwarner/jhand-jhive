@@ -9,14 +9,14 @@
     <script src="https://unpkg.com/aframe-animation-component/dist/aframe-animation-component.min.js"></script>
     <script src="https://unpkg.com/aframe-layout-component/dist/aframe-layout-component.min.js"></script>
     <script src="https://unpkg.com/aframe-randomizer-components/dist/aframe-randomizer-components.min.js"></script>
-    <script>
+    <!-- <script>
       AFRAME.registerComponent('wireframe', {
         dependencies: ['material'],
         init: function () {
           this.el.components.material.material.wireframe = true;
         }
       });
-    </script>
+    </script> -->
   </head>
   <body>
     <a-scene>
@@ -48,17 +48,11 @@
         ></a-mixin>
 
       </a-assets>
-<!--
-      <a-sky
-        animation="property: color; dir: alternate; dur: 60000;
-                           easing: easeInSine; loop: true; from: #FF00FF; to: #00FFFF"
-      ></a-sky> -->
 
       <a-entity rotation="-90 0 0" camera="userHeight: 1.6; fov: 75" look-controls>
-        <a-entity wireframe-linewidth="4" geometry="primitive: box" width="16" height="8" scale="20 10 20" position="0 0 -5" material="color: white" wireframe></a-entity>
+        <!-- <a-entity wireframe-linewidth="4" geometry="primitive: box" width="16" height="8" scale="20 10 20" position="0 0 -5" material="color: white" wireframe></a-entity> -->
 
         <a-entity id="grass" material="shader: flat; src: #grass;" width="16" height="16" scale="18 10 9" position="0 0 -6" geometry="primitive: plane"></a-entity>
-
 
         <!-- left -->
         <a-entity
