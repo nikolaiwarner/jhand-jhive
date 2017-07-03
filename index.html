@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>jhand jhive</title>
+    <meta name="description" content="jhand jhive">
+    <script src="https://aframe.io/releases/0.6.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-chromakey-material/dist/aframe-chromakey-material.min.js"></script>
+    <script src="https://unpkg.com/aframe-animation-component/dist/aframe-animation-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-layout-component/dist/aframe-layout-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-randomizer-components/dist/aframe-randomizer-components.min.js"></script>
+    <script>
+      AFRAME.registerComponent('wireframe', {
+        dependencies: ['material'],
+        init: function () {
+          this.el.components.material.material.wireframe = true;
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <a-scene>
+      <a-assets>
+        <video id="hands1" loop autoplay muted />
+        <video id="grass" loop autoplay muted />
+
+        <a-mixin id="hands" material="shader: chromakey; src: #hands1; color: 0.1 0.9 0.2" width="16" height="16" geometry="primitive: plane"></a-mixin>
+
+        <a-mixin id="level4"
+          position="0 -0.097 -2.5" rotation="-70 0 0" scale="5 5 5"
+          animation="property: scale; dir: alternate; dur: 6000;
+                             easing: easeInSine; loop: true; from: 5 5 5; to: 9 9 9"
+          animation__rotation="property: rotation; dir: alternate; dur: 2000;
+                            easing: easeInSine; loop: true; from: -70 0 0; to: -55 0 0"
+        ></a-entity>
+
+        <a-mixin id="level3"
+          position="0 -0.097 -1.7" rotation="-70 0 0" scale="3 3 3"
+          animation="property: scale; dir: alternate; dur: 4500;
+                             easing: easeInSine; loop: true; from: 3 3 3; to: 5 5 5"
+          animation__rotation="property: rotation; dir: alternate; dur: 1500;
+                            easing: easeInSine; loop: true; from: -70 0 0; to: -55 0 0"
+        ></a-entity>
+        <a-mixin id="level2"
+          position="0 0 -1" rotation="-55 0 0" scale="2 2 2"
+          animation="property: scale; dir: alternate; dur: 2600;
+                             easing: easeInSine; loop: true; from: 2 2 2; to: 2.5 2.5 2.5"
+        ></a-mixin>
+
+      </a-assets>
+
+      <a-sky
+        animation="property: color; dir: alternate; dur: 60000;
+                           easing: easeInSine; loop: true; from: #FF00FF; to: #00FFFF"
+      ></a-sky>
+
+      <a-entity rotation="-90 0 0" camera="userHeight: 1.6; fov: 75" look-controls>
+        <a-entity wireframe-linewidth="4" geometry="primitive: box" width="16" height="8" scale="20 10 20" position="0 0 -5" material="color: white" wireframe></a-entity>
+
+        <!-- left -->
+        <a-entity
+          position="-0.6 0 -0.6.5"
+          rotation="0 0 -90"
+        >
+          <a-entity mixin="hands level4"></a-entity>
+          <a-entity mixin="hands level3"></a-entity>
+          <a-entity mixin="hands level2"></a-entity>
+          <a-entity mixin="hands"></a-entity>
+        </a-entity>
+
+        <!-- right -->
+        <a-entity
+          position="0.6 0 -0.6.5"
+          rotation="0 0 90"
+        >
+          <a-entity mixin="hands level4"></a-entity>
+          <a-entity mixin="hands level3"></a-entity>
+          <a-entity mixin="hands level2"></a-entity>
+          <a-entity mixin="hands"></a-entity>
+        </a-entity>
+
+        <!-- top -->
+        <a-entity mixin="hands"
+          position="0 -0.1 -0.36"
+          rotation="0 0 180"
+        ></a-entity>
+
+        <!-- bottom -->
+        <a-entity mixin="hands"
+          position="0 -0.1 -0.35"
+        ></a-entity>
+
+      </a-entity>
+    </a-scene>
+
+    <script>
+      var constraints = { video: true };
+      navigator.mediaDevices.getUserMedia(constraints).then(function(mediaStream) {
+        var video = document.querySelector('video');
+        video.srcObject = mediaStream;
+        video.onloadedmetadata = function(e) {
+          video.play();
+        };
+      })
+      .catch(function(err) { console.log(err.name + ": " + err.message); });
+    </script>
+
+  </body>
+</html>
